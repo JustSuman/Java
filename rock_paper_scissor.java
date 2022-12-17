@@ -50,7 +50,7 @@ public class rock_paper_scissor {
                         result = "won";
                     }
                 }
-                    System.out.println("You"+result);
+                    System.out.println("You have"+result);
                     if(result == "lost" || result == "won" || result=="tie"){
                         game();
                     }
