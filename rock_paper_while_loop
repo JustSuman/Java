@@ -1,0 +1,56 @@
+import java.util.*;
+public class Rock_Paper_Scissor
+{
+    public static void main(String[] arg){
+    Scanner scan = new Scanner(System.in); 
+    String user;
+    
+    ArrayList choice =new ArrayList(Arrays.asList("rock", "paper", "scissor"));
+    
+    System.out.println("rock, paper or scissor?");
+    user = scan.nextLine();
+    while(choice.contains(user)){
+    /*TO make interesting, we get computer to choose another hand*/
+    Random random = new Random();
+    int index = random.nextInt(choice.size());
+    /*Printing out what computer chose*/
+    System.out.println("The computer chose " + choice.get(index));
+    
+    if(user.equals("rock")){
+    if(choice.get(index).equals("rock")){
+    System.out.println("Its a tie!");
+    } else if(choice.get(index).equals("paper")){
+    System.out.println("You lost");
+    }else{
+    System.out.println("You won");
+    }
+    }
+    
+    else if(user.equals("paper")){   
+    if(choice.get(index).equals("paper")){
+    System.out.println("Its a tie!");
+    } else if(choice.get(index).equals("scissor")){
+    System.out.println("You lost");
+    }else{
+    System.out.println("You won");
+    }
+    }
+    
+    else if(user.equals("scissor")){
+        if(choice.get(index).equals("scissor")){
+    System.out.println("Its a tie!");
+    } else if(choice.get(index).equals("rock")){
+    System.out.println("You lost");
+    }else{
+    System.out.println("You won");
+    }
+    /*if(user.equals("paper") == choices[index].equals("paper") || user.equals("paper") == choices[index].equals("scissor")|| user.equals("paper") == choices[index].equals("rock")  ){
+        loop();
+    }*/
+    
+    } 
+System.out.println( "rock, paper or scissor or no to terminate");
+    user = scan.nextLine();} 
+}}
+
+
