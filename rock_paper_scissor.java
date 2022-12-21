@@ -20,7 +20,7 @@ public class rock_paper_scissor {
                 int index = random.nextInt(choices.length);
                 /* Printing out what computer chose */
                 System.out.println("The computer chose " + choices[index]);
-
+                scan1.close();
                 if (user.equals("rock")) {
                     if (choices[index].equals("rock")) {
                         result = "tie";
@@ -50,13 +50,12 @@ public class rock_paper_scissor {
                         result = "won";
                     }
                 }
-                    System.out.println("You have"+result);
-                    if(result == "lost" || result == "won" || result=="tie"){
-                        game();
-                    }
+                System.out.println("You have" + result);
+                if (result == "lost" || result == "won" || result == "tie") {
+                    game();
+                }
             }
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
     }

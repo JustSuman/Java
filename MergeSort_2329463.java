@@ -1,6 +1,18 @@
 import java.util.*;
 
 public class MergeSort_2329463 {
+    void getInput() {
+        Scanner scan = new Scanner(System.in);
+        ArrayList<Integer> al = new ArrayList<Integer>();
+        String input = scan.nextLine();
+        scan.close();
+        String[] splitter = input.split(" ");
+        for (String a : splitter) {
+            int i = Integer.parseInt(a);
+            al.add(i);
+        }
+        System.out.println(al);
+    }
 
     void getOutput(ArrayList<Integer> al) {
         int n = al.size();
@@ -10,34 +22,30 @@ public class MergeSort_2329463 {
     }
 
     void merge(ArrayList<Integer> al, int beg, int mid, int end) {
+
         int n1 = mid - beg + 1;
         int n2 = end - mid;
-        // divide into two array if array is more or equal to 2
-        mid = al.size() / 2;
-        // after dividing naming right array and left array
-        ArrayList<Integer> left = new ArrayList<Integer>(mid); // size of the temporary array is upto mid
-        ArrayList<Integer> right;
-        if (al.size() % 2 == 0) {// if length of array is even then
-            right = new ArrayList<Integer>(mid);
-        } else {// if length of array is odd
-            right = new ArrayList<Integer>(mid + 1);
-        } // adding items into temporary array left
-        for (int i = 0; i < mid; i++) {
-            left.add(i);
-        } // adding items into temporary array rigth
-        for (int j = 0; j < right.size(); j++) {
-            right.add(mid + j);
+
+        ArrayList<Integer> left = new ArrayList<Integer>(n1);
+        ArrayList<Integer> right = new ArrayList<>(n2);
+
+        for (int i = 0; i < n1; ++i) {
+            left.add(i, al.get(beg + i));
         }
+        for (int j = 0; j < n2; ++j) {
+            right.add(j, al.get(mid + 1 + j));
+        }
+
         int i = 0, j = 0;
 
         // Initial index of merged subarray array
         int k = beg;
         while (i < n1 && j < n2) {
             if (left.get(i) <= right.get(j)) {
-                al.add(i);
+                al.add(k, i);
                 i++;
             } else {
-                al.add(j);
+                al.add(k, j);
                 j++;
             }
             k++;
@@ -45,14 +53,14 @@ public class MergeSort_2329463 {
 
         /* Copy remaining elements of L[] if any */
         while (i < n1) {
-            al.add(i);
+            al.add(k, i);
             i++;
             k++;
         }
 
-        /* Copy remaining elements of R[] if any */
+        /* Copy remaining elements of Right arraylist if any */
         while (j < n2) {
-            al.add(i);
+            al.add(k, j);
             j++;
             k++;
         }
@@ -73,8 +81,11 @@ public class MergeSort_2329463 {
     }
 
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
-
+        ArrayList<Integer> al = new ArrayList<Integer>();
+        MergeSort_2329463 test = new MergeSort_2329463();
+        test.getInput();
+        test.sort(al, 0, al.size() - 1);
+        System.out.println(al);
     }
 
 }
