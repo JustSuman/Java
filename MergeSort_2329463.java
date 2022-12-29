@@ -1,91 +1,54 @@
-import java.util.*;
+import java.util.ArrayList;
 
 public class MergeSort_2329463 {
-    void getInput() {
-        Scanner scan = new Scanner(System.in);
-        ArrayList<Integer> al = new ArrayList<Integer>();
-        String input = scan.nextLine();
-        scan.close();
-        String[] splitter = input.split(" ");
-        for (String a : splitter) {
-            int i = Integer.parseInt(a);
-            al.add(i);
-        }
-        System.out.println(al);
+
+  public static void mergeSort(ArrayList<Integer> list) {
+    if (list.size() > 1) {
+
+      ArrayList<Integer> firstHalf = new ArrayList<>(list.subList(0, list.size() / 2));
+      ArrayList<Integer> secondHalf = new ArrayList<>(list.subList(list.size() / 2, list.size()));
+
+      mergeSort(firstHalf);
+      mergeSort(secondHalf);
+
+      merge(list, firstHalf, secondHalf);
+    }
+  }
+
+  private static void merge(ArrayList<Integer> list, ArrayList<Integer> firstHalf, ArrayList<Integer> secondHalf) {
+
+    int firstIndex = 0;
+    int secondIndex = 0;
+    int listIndex = 0;
+
+    while (firstIndex < firstHalf.size() && secondIndex < secondHalf.size()) {
+      if (firstHalf.get(firstIndex) < secondHalf.get(secondIndex)) {
+        list.set(listIndex, firstHalf.get(firstIndex));
+        firstIndex++;
+      } else {
+        list.set(listIndex, secondHalf.get(secondIndex));
+        secondIndex++;
+      }
+      listIndex++;
     }
 
-    void getOutput(ArrayList<Integer> al) {
-        int n = al.size();
-        for (int i = 0; i < n; ++i)
-            System.out.print(al.get(i) + " ");
-        System.out.println();
+    ArrayList<Integer> remainingList = (firstIndex < firstHalf.size()) ? firstHalf : secondHalf;
+    int remainingIndex = (firstIndex < firstHalf.size()) ? firstIndex : secondIndex;
+    while (listIndex < list.size()) {
+      list.set(listIndex, remainingList.get(remainingIndex));
+      listIndex++;
+      remainingIndex++;
     }
+  }
 
-    void merge(ArrayList<Integer> al, int beg, int mid, int end) {
-
-        int n1 = mid - beg + 1;
-        int n2 = end - mid;
-
-        ArrayList<Integer> left = new ArrayList<Integer>(n1);
-        ArrayList<Integer> right = new ArrayList<>(n2);
-
-        for (int i = 0; i < n1; ++i) {
-            left.add(i, al.get(beg + i));
-        }
-        for (int j = 0; j < n2; ++j) {
-            right.add(j, al.get(mid + 1 + j));
-        }
-
-        int i = 0, j = 0;
-
-        // Initial index of merged subarray array
-        int k = beg;
-        while (i < n1 && j < n2) {
-            if (left.get(i) <= right.get(j)) {
-                al.add(k, i);
-                i++;
-            } else {
-                al.add(k, j);
-                j++;
-            }
-            k++;
-        }
-
-        /* Copy remaining elements of L[] if any */
-        while (i < n1) {
-            al.add(k, i);
-            i++;
-            k++;
-        }
-
-        /* Copy remaining elements of Right arraylist if any */
-        while (j < n2) {
-            al.add(k, j);
-            j++;
-            k++;
-        }
-    }
-
-    void sort(ArrayList<Integer> al, int beg, int end) {
-        if (beg < end) {
-            // Find the middle point
-            int mid = beg + (end - beg) / 2;
-
-            // Sort first and second halves
-            sort(al, end, mid);
-            sort(al, mid + 1, end);
-
-            // Merge the sorted halves
-            merge(al, beg, mid, end);
-        }
-    }
-
-    public static void main(String[] args) {
-        ArrayList<Integer> al = new ArrayList<Integer>();
-        MergeSort_2329463 test = new MergeSort_2329463();
-        test.getInput();
-        test.sort(al, 0, al.size() - 1);
-        System.out.println(al);
-    }
-
+  public static void main(String[] arg) {
+    ArrayList<Integer> list1 = new ArrayList<>();
+    list1.add(5);
+    list1.add(1);
+    list1.add(3);
+    list1.add(2);
+    list1.add(4);
+    MergeSort_2329463.mergeSort(list1);
+    System.out.println(list1);
+  }
 }
