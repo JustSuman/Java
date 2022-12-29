@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class MergeSort_2329463 {
 
@@ -42,13 +42,18 @@ public class MergeSort_2329463 {
   }
 
   public static void main(String[] arg) {
-    ArrayList<Integer> list1 = new ArrayList<>();
-    list1.add(5);
-    list1.add(1);
-    list1.add(3);
-    list1.add(2);
-    list1.add(4);
-    MergeSort_2329463.mergeSort(list1);
-    System.out.println(list1);
+    try (Scanner sc = new Scanner(System.in)) {
+      System.out.println("Enter the size of the list");
+      int user = sc.nextInt();
+      ArrayList<Integer> list1 = new ArrayList<>();
+      while (list1.size() < user) {
+        System.out.println("Enter the items: ");
+        int userItems = sc.nextInt();
+        list1.add(userItems);
+      }
+
+      MergeSort_2329463.mergeSort(list1);
+      System.out.println(list1);
+    }
   }
 }
